@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import CommentInput from './Comment/CommentInput';
+import CommentList from './Comment/CommentList';
 import './App.css';
 
 class App extends Component {
+  constructor () {
+    super()
+    this.state = {
+      comments: []
+    }
+  }
+
+  onStore = comments => {
+    const list = [];
+    list.push(comments)
+    localStorage.setItem('comments', JSON.stringify(list))
+    this.setState({comments:list})
+  }
+
   render() {
+    const { comments } = this.state
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <CommentInput onStore={this.onStore} />
+        <CommentList comments={comments}/>
       </div>
     );
   }

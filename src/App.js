@@ -6,16 +6,24 @@ import './App.css';
 class App extends Component {
   constructor () {
     super()
+    const comments = localStorage.getItem('comments');
     this.state = {
-      comments: []
+      comments: JSON.parse(comments) || []
     }
   }
 
-  onStore = comments => {
-    const list = [];
-    list.push(comments)
-    localStorage.setItem('comments', JSON.stringify(list))
-    this.setState({comments:list})
+  onStore = comment => {
+    if(!comment) return '';
+    const { comments } = this.state;
+    comments.push(comment);
+    this.setState({comments})
+    localStorage.setItem('comments', JSON.stringify(comments))
+  }
+  onDelete = (index) => {
+    const {comments} = this.state
+    comments.splice(index, 1)
+    this.setState({ comments })
+    localStorage.setItem('comments', JSON.stringify(comments))
   }
 
   render() {
@@ -23,7 +31,7 @@ class App extends Component {
     return (
       <div className="App">
         <CommentInput onStore={this.onStore} />
-        <CommentList comments={comments}/>
+        <CommentList onDelete={this.onDelete.bind(this)} comments={comments}/>
       </div>
     );
   }

@@ -5,7 +5,6 @@ class CommentInput extends Component {
   state = {
     name: localStorage.getItem('user') || '',
     comment: "",
-    comments: []
   }
 
   componentDidMount() {
@@ -14,12 +13,15 @@ class CommentInput extends Component {
 
   OnStore = () => {
     if(this.props.onStore) {
-      const {name, comment} = this.state;
-      this.props.onStore({name, comment})
+      this.props.onStore({
+        name: this.state.name,
+        comment: this.state.comment,
+        time: +new Date()
+
+      })
     }
     localStorage.setItem('user', this.state.name)
-
-    this.setState({commnets: ""})
+    this.setState({comment: ""})
   }
 
   OnName = e => {
@@ -34,11 +36,14 @@ class CommentInput extends Component {
       comment: e.target.value
     })
   }
+  onfocus = () => {
+    this.textarea.focus();
+  }
   render() {
     const {comment,name} = this.state
     return (
       <div>
-        <div>用户名：<input onChange={this.OnName} value={name}></input></div>
+        <div>用户名：<input onBlur={this.onfocus} onChange={this.OnName} value={name}></input></div>
         <div>评论内容：<textarea ref={(textarea)=> this.textarea = textarea} onChange={this.OnComment} value={comment}></textarea></div>
         <button onClick={this.OnStore}>发布</button>
       </div>

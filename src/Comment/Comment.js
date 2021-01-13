@@ -41,11 +41,13 @@ class Comment extends Component {
     const {timeInfo} = this.state
     const {comment} = this.props
     return (
-      <div style={{padding:"25px",border:"1px solid #000"}}>
-        {comment.name} :
+      <div className='singleComment'>
+        <strong>{comment.name} :</strong>
         <p dangerouslySetInnerHTML={{__html: this.getContent(comment.comment)}}></p>
-        <span>{timeInfo}</span>
-        <button onClick={this.onDelete}>删除</button>
+        <div className='commentInfo'>
+          <span>{timeInfo}</span>
+          <button onClick={this.onDelete} className='deleteBtn'>删除</button>
+        </div>
       </div>
     );
   }

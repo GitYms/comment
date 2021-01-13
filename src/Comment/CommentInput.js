@@ -42,10 +42,16 @@ class CommentInput extends Component {
   render() {
     const {comment,name} = this.state
     return (
-      <div>
-        <div>用户名：<input onBlur={this.onfocus} onChange={this.OnName} value={name}></input></div>
-        <div>评论内容：<textarea ref={(textarea)=> this.textarea = textarea} onChange={this.OnComment} value={comment}></textarea></div>
-        <button onClick={this.OnStore}>发布</button>
+      <div className='inputBox'>
+        <div className='inputName'>
+          用&nbsp;户 &nbsp;名：
+          <input onBlur={this.onfocus} onChange={this.OnName} value={name} style={{ height: '28px', width: '85%'}}></input>
+        </div>
+        <div className='inputContent'>
+          评论内容：
+          <textarea ref={(textarea)=> this.textarea = textarea} onChange={this.OnComment} value={comment} style={{ width: '85%', height: '40px'}}></textarea>
+        </div>
+        <button className='submitBtn' onClick={this.OnStore}>发布</button>
       </div>
     );
   }

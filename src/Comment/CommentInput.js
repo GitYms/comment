@@ -44,12 +44,22 @@ class CommentInput extends Component {
     return (
       <div className='inputBox'>
         <div className='inputName'>
-          用&nbsp;户 &nbsp;名：
-          <input onBlur={this.onfocus} onChange={this.OnName} value={name} style={{ height: '28px', width: '85%'}}></input>
+          <span className='label-span'>用&nbsp;户 &nbsp;名：</span>
+          <input
+            onBlur={this.onfocus}
+            onChange={this.OnName}
+            value={name}
+            style={{ height: '28px', width: '85%'}}
+          />
         </div>
         <div className='inputContent'>
-          评论内容：
-          <textarea ref={(textarea)=> this.textarea = textarea} onChange={this.OnComment} value={comment} style={{ width: '85%', height: '40px'}}></textarea>
+          <span className='label-span'>评论内容：</span>
+          <textarea
+            ref={(textarea) => this.textarea = textarea}
+            onChange={this.OnComment}
+            value={comment}
+            style={{ width: '85%', height: '40px'}}
+          />
         </div>
         <button className='submitBtn' onClick={this.OnStore}>发布</button>
       </div>

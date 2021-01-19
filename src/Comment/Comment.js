@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class Comment extends Component {
   constructor () {
     super()
@@ -17,8 +16,8 @@ class Comment extends Component {
     clearInterval(this.timer)
   }
   updateTime = () => {
-    const {comment} = this.props
-    const duration = (+Date.now() - comment.time) / 1000
+    const { comment } = this.props;
+    const duration = (+Date.now() - comment.time) / 1000;
     this.setState({
       timeInfo: duration > 60
         ? `${Math.round(duration / 60)} 分钟前`
